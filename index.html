@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <head><title>Redirecting…</title></head>
+  <body>
+    <a href="https://maps.google.com/">Click here to load Google Maps</a>
+    <script>
+      var link = document.getElementsByTagName("a")[0];
+      var href = link.getAttribute("href");
+      var query = new URLSearchParams(window.location.search).get("q");
+
+      href = href + "?q=" + query;
+      link.setAttribute("href", href);
+      window.location.replace (href);
+    </script>
+  </body>
+</html>
