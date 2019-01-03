@@ -1,16 +1,95 @@
 <!DOCTYPE html>
 <html>
-  <head><title>Redirecting…</title></head>
-  <body>
-    <a href="https://maps.google.com/">Click here to load Google Maps</a>
-    <script>
-      var link = document.getElementsByTagName("a")[0];
-      var href = link.getAttribute("href");
-      var query = new URLSearchParams(window.location.search).get("q");
+  <head>
+    <title>Maps</title>
+    <style>
+      body {
+        font-family: "Open Sans", sans-serif;
+        margin: 0 auto;
+        max-width: 350px;
+        width: 90%;
+      }
 
-      href = href + "?q=" + query;
-      link.setAttribute("href", href);
-      window.location.replace (href);
+      h1,
+      h2 {
+        text-align: center;
+      }
+
+      h1 {
+        font-weight: 500;
+        margin-bottom: 0;
+      }
+
+      xh1::before {
+        background-image: url('icons/find-location-48.svg');
+        background-position: left center;
+        background-repeat: no-repeat;
+        background-size: 48px;
+        content: "";
+        display: inline-block;
+        height: 48px;
+        vertical-align: text-bottom;
+        width: 48px;
+      }
+
+      h2 {
+        font-weight: 100;
+        margin-top: 0;
+      }
+
+      .provider {
+        border-radius: 0.25em;
+        color: inherit;
+        display: block;
+        font-size: 1.125em;
+        margin: 0.25em;
+        padding: 0.5em;
+        text-decoration: none;
+      }
+
+      .provider:hover {
+        background-color: #eee;
+      }
+
+      .provider::before {
+        background-repeat: no-repeat;
+        background-size: 16px;
+        content: "";
+        display: inline-block;
+        height: 16px;
+        margin-right: 0.5em;
+        width: 16px;
+      }
+
+      .provider.google::before {
+        background-image: url('https://www.google.com/images/branding/product/ico/maps_32dp.ico');
+      }
+
+      .provider.osm::before {
+        background-image: url('https://www.openstreetmap.org/favicon.ico');
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Search for Location</h1>
+    <h2>Choose a provider:</h2>
+    <a class="provider google" href="https://maps.google.com/" data-path="" data-param="q">Google Maps</a>
+    <a class="provider osm" href="https://openstreetmap.org/" data-path="search" data-param="query">OpenStreetMap</a>
+    <script>
+      var links = document.getElementsByClassName("provider");
+
+      for (var link of links) {
+        var href = link.getAttribute("href");
+        var path = link.dataset.path;
+        var param = link.dataset.param;
+
+        var query = new URLSearchParams(window.location.search).get("q");
+
+        href = href + "?" + param + "=" + query;
+        link.setAttribute("href", href);
+      };
+
+      // window.location.replace (href);
     </script>
   </body>
 </html>
