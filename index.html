@@ -68,6 +68,10 @@
       .provider.osm::before {
         background-image: url('https://www.openstreetmap.org/favicon.ico');
       }
+
+      .provider.baidu::before {
+        background-image: url('https://map.baidu.com/favicon.ico');
+      }
     </style>
   </head>
   <body>
@@ -75,6 +79,7 @@
     <h2>Choose a provider:</h2>
     <a class="provider google" href="https://maps.google.com/" data-path="" data-param="q">Google Maps</a>
     <a class="provider osm" href="https://openstreetmap.org/" data-path="search" data-param="query">OpenStreetMap</a>
+    <a class="provider baidu" href="https://map.baidu.com/" data-path="" data-param="q">Baidu Map</a>
     <script>
       var links = document.getElementsByClassName("provider");
 
