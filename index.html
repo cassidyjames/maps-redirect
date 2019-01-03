@@ -79,8 +79,9 @@
     <h2>Choose a provider:</h2>
     <a class="provider google" href="https://maps.google.com/" data-path="" data-param="q">Google Maps</a>
     <a class="provider osm" href="https://openstreetmap.org/" data-path="search" data-param="query">OpenStreetMap</a>
-    <a class="provider baidu" href="https://map.baidu.com/" data-path="" data-param="q">Baidu Map</a>
+    <a class="provider baidu" href="http://api.map.baidu.com/geocoder" data-path="" data-param="address" data-extra-params="&output=html">Baidu</a>
     <script>
+      var query = new URLSearchParams(window.location.search).get("q");
       var links = document.getElementsByClassName("provider");
 
       for (var link of links) {
@@ -88,9 +89,12 @@
         var path = link.dataset.path;
         var param = link.dataset.param;
 
-        var query = new URLSearchParams(window.location.search).get("q");
+        var extraParams = "";
+        if (link.dataset.extraParams) {
+          extraParams = link.dataset.extraParams;
+        }
 
-        href = href + "?" + param + "=" + query;
+        href = href + "?" + param + "=" + query + extraParams;
         link.setAttribute("href", href);
       };
 
